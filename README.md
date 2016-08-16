@@ -1,0 +1,7 @@
+# TCC-Telecom
+
+Projeto finalizado e entregue. Não foi dado continuidade, caso queira continuar com ele, sinta-se livre para gerar um fork do mesmo.
+
+Resumo: Atualmente a telefonia, como um todo, é algo comum para a maioria da população e mesmo sem as pessoas verem, o número de pessoas que passam a utilizar telefonia IP cresce cada vez mais. A proposta desse trabalho é acompanhar esse crescimento e com isso disponibilizar mais uma ferramenta que pode ser utilizada para a tarifação telefônica pré-paga e pós-paga. Para isso foi desenvolvido um sistema de tarifação que conta com um tarifador pré-pago em tempo real e também pós-pago, juntamente de uma interface administrativa para facilitar o cadastro de dados, como os planos, planos de discagem, assinantes e tarifas. Essa ferramenta se utiliza de módulos disponibilizados juntamente do FreeSWITCH e da plataforma Java para o seu desenvolvimento.
+
+Abstract: Nowadays telecommunication as a whole is something ordinary for most of the population and even though most people don’t see it, the number of people that is using IP telecommunications is growing more and more. The purpose of this work is to follow this growth and to provide a tool that can be used for pre-paid and post-paid telephone billing. For that, a billing system with both pre-paid and post-paid real time billing, along with a managing interface that eases data registering such as plans, dialing plans, users and bills, was developed. This tool uses modules provided along with the FreeSWITCH and the Java platform for it’s development. 
