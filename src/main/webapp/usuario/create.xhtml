@@ -1,0 +1,70 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../template/create.xhtml">
+	<ui:param name="actionBean" value="#{usuarioBean}" />
+
+	<ui:define name="create_body">
+		<h:panelGroup id="formPanel" styleClass="row">
+			<h:panelGroup layout="block" styleClass="box col-xs-12 col-md-8 col-md-offset-2">
+				<h:panelGroup id="usuarioPanel" layout="block" styleClass="boxed-table">
+
+					<!-- TITULO PAGINA -->
+					<h:panelGroup layout="block" styleClass="row">
+						<h:outputText value="Registro de Usuário" styleClass="title" />
+					</h:panelGroup>
+
+					<h5 id="conta">DADOS</h5>
+
+					<h:panelGroup id="nomePanel" layout="block" styleClass="row">
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust">
+							<p:inputText id="nome" value="#{usuarioBean.usuario.nomeCompleto}" placeholder="Nome completo*" title="Nome completo" styleClass="col-xs-12">
+							</p:inputText>
+						</h:panelGroup>
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust right-adjust">
+							<p:inputText id="email" value="#{usuarioBean.usuario.email}" placeholder="Email*" title="Email" styleClass="col-xs-12">
+							</p:inputText>
+						</h:panelGroup>
+					</h:panelGroup>
+
+					<h:panelGroup id="freeswitchUserPanel" layout="block" styleClass="row">
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust">
+							<p:inputText id="login" value="#{usuarioBean.usuario.username}" placeholder="Usuário FreeSWITCH*" title="Usuário FreeSWITCH" styleClass="col-xs-12">
+							</p:inputText>
+						</h:panelGroup>
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust right-adjust">
+							<p:inputText id="password" value="#{usuarioBean.usuario.password}" placeholder="Senha FreeSWITCH*" title="Senha FreeSWITCH" styleClass="col-xs-12">
+							</p:inputText>
+						</h:panelGroup>
+					</h:panelGroup>
+
+					<h:panelGroup id="freeswitchDataPanel" layout="block" styleClass="row">
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust">
+							<p:inputText id="callerId" value="#{usuarioBean.usuario.callerId}" placeholder="Caller ID FreeSWITCH*" title="Caller ID FreeSWITCH" styleClass="col-xs-12">
+							</p:inputText>
+						</h:panelGroup>
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust">
+							<h:selectOneMenu id="plano" value="#{usuarioBean.usuario.plano}" styleClass="col-xs-8 col-md-10" title="Selecione um plano" converter="#{genericConverter}">
+								<f:selectItems value="#{usuarioBean.planos}" var="plano" itemValue="#{plano}" itemLabel="#{plano.nomePlano}"/>
+							</h:selectOneMenu>
+						</h:panelGroup>
+					</h:panelGroup>
+
+					<h:panelGroup id="formActionPanel" layout="block" styleClass="row" style="margin-top:40px;">
+						<h:commandButton id="saveButton" value="Salvar" action="#{usuarioBean.save}" styleClass="btn btn-primary" update="@form" />
+						<f:verbatim>&#160;&#160;</f:verbatim>
+						<h:commandButton id="cancelButton" value="Cancelar" immediate="true" process="@this" update="@this" styleClass="btn" />
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+	</ui:define>
+	
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{usuarioBean.init}" />
+		<f:viewParam name="id" value="#{usuarioBean.usuario.id}" />
+	</f:metadata>
+	
+</ui:composition>
+</html>

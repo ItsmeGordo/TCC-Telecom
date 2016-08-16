@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../template/create.xhtml">
+	<ui:param name="actionBean" value="#{planoDiscagemBean}" />
+
+	<ui:define name="create_body">
+		<h:panelGroup id="formPanel" styleClass="row">
+			<h:panelGroup layout="block" styleClass="box col-xs-12 col-md-8 col-md-offset-2">
+				<h:panelGroup id="preRateioContaPanel" layout="block" styleClass="boxed-table">
+
+					<!-- TITULO PAGINA -->
+					<h:panelGroup layout="block" styleClass="row">
+						<h:outputText value="Registro de Plano de Discagem" styleClass="title" />
+					</h:panelGroup>
+
+					<h5 id="conta">DADOS</h5>
+
+					<h:panelGroup id="planoPrecoPanel" layout="block" styleClass="row">
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust">
+							<h:selectOneMenu id="plano" value="#{planoDiscagemBean.planoDiscagem.plano}" styleClass="col-xs-8 col-md-10" title="Selecione um plano" converter="#{genericConverter}">
+								<f:selectItems value="#{planoDiscagemBean.planos}" var="plano" itemValue="#{plano}" itemLabel="#{plano.nomePlano}"/>
+							</h:selectOneMenu>
+						</h:panelGroup>
+						<h:panelGroup layout="block" styleClass="col-xs-6 right-adjust left-adjust">
+							<h:selectOneMenu id="tarifa" value="#{planoDiscagemBean.planoDiscagem.tarifaVenda}" styleClass="col-xs-8 col-md-10" title="Selecione uma tarifa" converter="#{genericConverter}">
+								<f:selectItems value="#{planoDiscagemBean.tarifas}" var="tarifa" itemValue="#{tarifa}" itemLabel="R$ #{tarifa.valorVenda} / #{tarifa.cadencia} seg"/>
+							</h:selectOneMenu>
+						</h:panelGroup>
+					</h:panelGroup>
+
+					<h:panelGroup id="actionPanel" layout="block" styleClass="row">
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust">
+							<p:inputText id="action" value="#{planoDiscagemBean.planoDiscagem.action}" placeholder="Ação*" title="Ação" styleClass="col-xs-12">
+							</p:inputText>
+						</h:panelGroup>
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust right-adjust">
+							<p:inputText id="actionAtt" value="#{planoDiscagemBean.planoDiscagem.actionAtt}" placeholder="Atributos da Açao*" title="Atributos da Ação" styleClass="col-xs-12">
+							</p:inputText>
+						</h:panelGroup>
+					</h:panelGroup>
+
+					<h:panelGroup id="regexpPanel" layout="block" styleClass="row">
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust right-adjust">
+							<p:inputText id="regExp" value="#{planoDiscagemBean.planoDiscagem.expressaoRegular}" placeholder="Expressão Regular*" title="Expressão Regular"
+								styleClass="col-xs-12">
+							</p:inputText>
+						</h:panelGroup>
+					</h:panelGroup>
+					<h:panelGroup id="descriptionPanel" layout="block" styleClass="row">
+						<h:panelGroup layout="block" styleClass="col-xs-12">
+							<p:inputTextarea id="descricao" value="#{planoDiscagemBean.planoDiscagem.descricao}" placeholder="Descrição*" maxlength="400" counter="descricaoCounter" rows="2"
+								counterTemplate="{0}" styleClass="col-xs-12" title="Descrição" autoResize="false" />
+							<h:outputText id="descricaoCounter" class="counter" />
+						</h:panelGroup>
+					</h:panelGroup>
+
+					<h:panelGroup id="formActionPanel" layout="block" styleClass="row" style="margin-top:40px;">
+						<h:commandButton id="saveButton" value="Salvar" action="#{planoDiscagemBean.save}" styleClass="btn btn-primary" update="@form" />
+						<f:verbatim>&#160;&#160;</f:verbatim>
+						<h:commandButton id="cancelButton" value="Cancelar" immediate="true" process="@this" update="@this" styleClass="btn" />
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+	</ui:define>
+	
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{planoDiscagemBean.init}" />
+		<f:viewParam name="id" value="#{planoDiscagemBean.planoDiscagem.id}" />
+	</f:metadata>
+	
+</ui:composition>
+</html>

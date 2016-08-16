@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="../template/search.xhtml">
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{usuarioBean.viewInit}" />
+		</f:metadata>
+	
+		<ui:param name="actionBean" value="#{usuarioBean}" />
+		<ui:param name="searchEnable" value="false"/>
+		
+		<ui:define name="report_table">
+			<p:dataTable id="usuarioTable" var="user" value="#{usuarioBean.usuarioDataModel}" paginator="true" lazy="true" emptyMessage="Nenhum resultado encontrado!" sortBy="id" sortOrder="descending"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,20,50"
+				paginatorPosition="bottom" rows="10" currentPageReportTemplate="{currentPage} de {totalPages}" selectionMode="single" selection="#{usuarioBean.usuario}" rowKey="#{user.id}">
+			    <p:ajax event="contextMenu" process="usuarioTable" update=":search_form:contextMenu" oncomplete="tableMenu.show(currentEvent);" id="pajax"/>
+				<p:column headerText="ID" styleClass="vis5" sortBy="id">
+					<h:outputText value="#{user.id}">
+						<f:convertNumber pattern="00000"/>
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Nome" styleClass="vis30">
+					<h:outputText value="#{user.nomeCompleto}"/>
+				</p:column>
+				<p:column headerText="Email" styleClass="vis25">
+					<h:outputText value="#{user.email}"/>
+				</p:column>
+				<p:column headerText="Caller ID" styleClass="vis15">
+					<h:outputText value="#{user.callerId}"/>
+				</p:column>
+				<p:column headerText="Usuário FreeSWITCH" styleClass="vis10">
+					<h:outputText value="#{user.username}"/>
+				</p:column>
+				<p:column headerText="Plano" styleClass="vis10">
+					<h:outputText value="#{user.plano.nomePlano}"/>
+				</p:column>
+				<p:column headerText="Crédito" styleClass="vis5">
+					<h:outputText value="#{user.credito}"/>
+				</p:column>
+			</p:dataTable>
+			<p:contextMenu id="contextMenu" for="usuarioTable" widgetVar="tableMenu">
+		        <p:menuitem id="edit" value="Editar" url="create.jsf?id=#{usuarioBean.usuario.id}"/>
+		        <p:menuitem id="delete" value="Remover" actionListener="#{usuarioBean.delete()}" update="usuarioTable"/>
+			</p:contextMenu>
+			
+		</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="../template/search.xhtml">
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{tarifaVendaBean.viewInit}" />
+		</f:metadata>
+	
+		<ui:param name="actionBean" value="#{tarifaVendaBean}" />
+		<ui:param name="searchEnable" value="false"/>
+		
+		<ui:define name="report_table">
+			<p:dataTable id="tarifaTable" var="tar" value="#{tarifaVendaBean.tarifaDataModel}" paginator="true" lazy="true" emptyMessage="Nenhum resultado encontrado!" sortBy="id" sortOrder="descending"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,20,50"
+				paginatorPosition="bottom" rows="10" currentPageReportTemplate="{currentPage} de {totalPages}" selectionMode="single" selection="#{tarifaVendaBean.tarifa}" rowKey="#{tar.id}">
+			    <p:ajax event="contextMenu" process="tarifaTable" update=":search_form:contextMenu" oncomplete="tableMenu.show(currentEvent);" id="pajax"/>
+				<p:column headerText="ID" styleClass="vis5" sortBy="id">
+					<h:outputText value="#{tar.id}">
+						<f:convertNumber pattern="00000"/>
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Valor de Venda" styleClass="vis10">
+					<h:outputText value="#{tar.valorVenda}"/>
+				</p:column>
+				<p:column headerText="Cadencia" styleClass="vis10">
+					<h:outputText value="#{tar.cadencia}"/>
+				</p:column>
+				<p:column headerText="Descrição">
+					<h:outputText value="#{tar.descricao}"/>
+				</p:column>
+			</p:dataTable>
+			<p:contextMenu id="contextMenu" for="tarifaTable" widgetVar="tableMenu">
+		        <p:menuitem id="edit" value="Editar" url="create.jsf?id=#{tarifaVendaBean.tarifa.id}"/>
+		        <p:menuitem id="delete" value="Remover" actionListener="#{tarifaVendaBean.delete()}" update="tarifaTable"/>
+			</p:contextMenu>
+			
+		</ui:define>
+	</ui:composition>
+</html>

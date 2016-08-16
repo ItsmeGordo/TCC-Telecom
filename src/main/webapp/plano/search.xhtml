@@ -1,0 +1,40 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+
+	<ui:composition template="../template/search.xhtml">
+		<f:metadata>
+			<f:event type="preRenderView" listener="#{planoBean.viewInit}" />
+		</f:metadata>
+	
+		<ui:param name="actionBean" value="#{planoBean}" />
+		<ui:param name="searchEnable" value="false"/>
+		
+		<ui:define name="report_table">
+			<p:dataTable id="planoTable" var="plano" value="#{planoBean.planoDataModel}" paginator="true" lazy="true" emptyMessage="Nenhum resultado encontrado!" sortBy="id" sortOrder="descending"
+				paginatorTemplate="{FirstPageLink} {PreviousPageLink} {CurrentPageReport} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}" rowsPerPageTemplate="5,10,20,50"
+				paginatorPosition="bottom" rows="10" currentPageReportTemplate="{currentPage} de {totalPages}" selectionMode="single" selection="#{planoBean.plano}" rowKey="#{plano.id}">
+			    <p:ajax event="contextMenu" process="planoTable" update=":search_form:contextMenu" oncomplete="tableMenu.show(currentEvent);" id="pajax"/>
+				<p:column headerText="ID" styleClass="vis5" sortBy="id">
+					<h:outputText value="#{plano.id}">
+						<f:convertNumber pattern="00000"/>
+					</h:outputText>
+				</p:column>
+				<p:column headerText="Nome do Plano">
+					<h:outputText value="#{plano.nomePlano}"/>
+				</p:column>
+				<p:column headerText="Pré Pago">
+					<h:outputText value="#{plano.prePago}" />
+				</p:column>
+			</p:dataTable>
+			<p:contextMenu id="contextMenu" for="planoTable" widgetVar="tableMenu">
+		        <p:menuitem id="edit" value="Editar" url="create.jsf?id=#{planoBean.plano.id}"/>
+		        <p:menuitem id="delete" value="Remover" actionListener="#{plano.delete()}" update="planoTable"/>
+			</p:contextMenu>
+			
+		</ui:define>
+	</ui:composition>
+</html>

@@ -1,0 +1,35 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:h="http://java.sun.com/jsf/html"
+	  xmlns:ui="http://java.sun.com/jsf/facelets"
+	  xmlns:p="http://primefaces.org/ui"
+	  xmlns:f="http://java.sun.com/jsf/core"
+	  xmlns:o="http://omnifaces.org/ui"
+	  xmlns:pe="http://primefaces.org/ui/extensions">
+<h:body>
+	<ui:composition template="template.xhtml">
+		<ui:param name="defineStyle" value="defineStyle" />
+
+		<ui:define name="search_new_button">
+			<ui:insert name="breadcrumb"/>
+		</ui:define>
+
+		<ui:define name="body">
+			<div class="col-md-12">
+				<h:form id="registration_form" class="form-horizontal" prependId="false">
+					<div class="row">
+						<div class="col-md-12 pt-10">
+							<ui:insert name="create_body" />
+							<ui:insert name="snippets" />
+							<h:panelGroup id="dialogs">
+								<ui:insert name="dialogs" />
+							</h:panelGroup>
+						</div>
+					</div>
+					<o:highlight styleClass="error"/>
+				</h:form>
+			</div>
+		</ui:define>
+		
+	</ui:composition>
+</h:body>
+</html>

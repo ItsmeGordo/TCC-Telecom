@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../template/create.xhtml">
+	<ui:param name="actionBean" value="#{administradorBean}" />
+
+	<ui:define name="create_body">
+		<h:panelGroup id="formPanel" styleClass="row">
+			<h:panelGroup layout="block" styleClass="box col-xs-12 col-md-8 col-md-offset-2">
+				<h:panelGroup id="preRateioContaPanel" layout="block" styleClass="boxed-table">
+
+					<!-- TITULO PAGINA -->
+					<h:panelGroup layout="block" styleClass="row">
+						<h:outputText value="Registro de Administrador" styleClass="title" />
+					</h:panelGroup>
+
+					<h5 id="conta">DADOS</h5>
+
+					<h:panelGroup id="nomePanel" layout="block" styleClass="row">
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust">
+							<p:inputText id="primeiroNome" value="#{administradorBean.administrador.firstName}" placeholder="Primeiro Nome*" title="Primeiro Nome" styleClass="col-xs-12">
+							</p:inputText>
+						</h:panelGroup>
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust right-adjust">
+							<p:inputText id="ultimoNome" value="#{administradorBean.administrador.lastName}" placeholder="Último Nome*" title="Último nome" styleClass="col-xs-12">
+							</p:inputText>
+						</h:panelGroup>
+					</h:panelGroup>
+
+					<h:panelGroup id="userDataPanel" layout="block" styleClass="row">
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust">
+							<p:inputText id="login" value="#{administradorBean.administrador.login}" placeholder="Login*" title="Login" styleClass="col-xs-12">
+							</p:inputText>
+						</h:panelGroup>
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust right-adjust">
+							<p:inputText id="password" value="#{administradorBean.administrador.password}" placeholder="Senha*" title="Senha" styleClass="col-xs-12">
+							</p:inputText>
+						</h:panelGroup>
+					</h:panelGroup>
+
+					<h:panelGroup id="emailPanel" layout="block" styleClass="row">
+						<h:panelGroup layout="block" styleClass="col-xs-12 left-adjust">
+							<p:inputText id="email" value="#{administradorBean.administrador.email}" placeholder="Email*" title="Email" styleClass="col-xs-12">
+							</p:inputText>
+						</h:panelGroup>
+					</h:panelGroup>
+
+					<h:panelGroup id="formActionPanel" layout="block" styleClass="row" style="margin-top:40px;">
+						<p:commandButton id="saveButton" value="Salvar" action="#{administradorBean.save}" styleClass="btn btn-primary" update="@form" />
+						<f:verbatim>&#160;&#160;</f:verbatim>
+						<p:commandButton id="cancelButton" value="Cancelar" immediate="true" process="@this" update="@this" styleClass="btn" />
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+	</ui:define>
+	
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{administradorBean.init}" />
+		<f:viewParam name="id" value="#{administradorBean.administrador.id}" />
+	</f:metadata>
+	
+</ui:composition>
+</html>

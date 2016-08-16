@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<datasources xmlns="http://www.jboss.org/ironjacamar/schema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+        http://www.jboss.org/ironjacamar/schema
+        http://docs.jboss.org/ironjacamar/schema/datasources_1_0.xsd">
+
+        <datasource jndi-name="java:/fsbilling" pool-name="fsbilling" enabled="true" use-java-context="true">
+        <connection-url>jdbc:mysql://127.0.0.1:3306/fsbilling?autoReconnect=true&amp;useUnicode=true&amp;connectionCollation=utf8_general_ci&amp;characterSetResults=utf8&amp;characterEncoding=UTF-8</connection-url>
+        <driver>mysqlDriver</driver>
+        <transaction-isolation>TRANSACTION_READ_COMMITTED</transaction-isolation>
+        <pool>
+            <min-pool-size>0</min-pool-size>
+            <max-pool-size>20</max-pool-size>
+            <prefill>true</prefill>
+        </pool>
+        <security>
+            <user-name>root</user-name>
+            <password>root</password>
+        </security>
+        <validation>
+            <check-valid-connection-sql>select 1</check-valid-connection-sql>
+        </validation>
+    </datasource>
+</datasources>

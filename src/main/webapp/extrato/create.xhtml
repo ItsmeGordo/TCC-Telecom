@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core" xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+
+<ui:composition template="../template/create.xhtml">
+	<ui:param name="actionBean" value="#{financeiroBean}" />
+
+	<ui:define name="create_body">
+		<h:panelGroup id="formPanel" styleClass="row">
+			<h:panelGroup layout="block" styleClass="box col-xs-12 col-md-8 col-md-offset-2">
+				<h:panelGroup id="creditoPanel" layout="block" styleClass="boxed-table">	
+
+					<!-- TITULO PAGINA -->
+					<h:panelGroup layout="block" styleClass="row">
+						<h:outputText value="Gerar Extrato" styleClass="title" />
+					</h:panelGroup>
+
+					<h:panelGroup id="dadosPanel" layout="block" styleClass="row">
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust">
+							<h:selectOneMenu id="usuario" value="#{financeiroBean.usuario}" styleClass="col-xs-8 col-md-10" title="Selecione um usuario" converter="#{genericConverter}">
+								<f:selectItems value="#{financeiroBean.usuarios}" var="usuario" itemValue="#{usuario}" itemLabel="#{usuario.nomeCompleto}"/>
+							</h:selectOneMenu>
+						</h:panelGroup>
+					</h:panelGroup>
+
+					<h:panelGroup id="datePanel" layout="block" styleClass="row">
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust">
+							<h:inputText id="initDate" value="#{financeiroBean.initTime}" placeholder="Data inicio (dd/MM/yyyy)*" title="Data inicio (dd/MM/yyyy)"/>
+						</h:panelGroup>
+
+						<h:panelGroup layout="block" styleClass="col-xs-6 left-adjust right-adjust">
+							<h:inputText id="endDate" value="#{financeiroBean.endTime}" placeholder="Data inicio (dd/MM/yyyy)*" title="Data inicio (dd/MM/yyyy)"/>
+						</h:panelGroup>
+						
+					</h:panelGroup>
+
+					<h:panelGroup id="formActionPanel" layout="block" styleClass="row" style="margin-top:40px;">
+						<h:commandButton id="saveButton" value="Gerar extrato" action="#{financeiroBean.downloadCSV()}" styleClass="btn btn-primary" update="@form" />
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGroup>
+		</h:panelGroup>
+	</ui:define>
+	
+	<f:metadata>
+		<f:event type="preRenderView" listener="#{tarifaCompraBean.init}" />
+		<f:viewParam name="id" value="#{tarifaCompraBean.tarifa.id}" />
+	</f:metadata>
+	
+</ui:composition>
+</html>

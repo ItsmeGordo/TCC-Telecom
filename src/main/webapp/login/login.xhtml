@@ -1,0 +1,41 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui">
+	<h:head>
+		<title>FreeSWITCH Billing</title>
+		<link href="${request.contextPath}/resources/css/bootstrap.min.css" rel="stylesheet" />
+		<link href="${request.contextPath}/resources/css/signin.css" rel="stylesheet" />
+	</h:head>
+
+	<body>
+
+		<div class="container">
+
+			<h:form class="form-signin">
+				<p:growl id="growl" autoUpdate="true" globalOnly="true" />
+				<p:panel>
+					<h2 class="form-signin-heading">Login</h2>
+					<p:inputText placeholder="Login" styleClass="form-control"
+						value="#{loginBean.login}" />
+					<p:spacer height="10"/>
+					<p:password placeholder="Senha" styleClass="form-control"
+						value="#{loginBean.senha}" />
+					<br/>
+					<h:commandButton value="Logar" styleClass="btn btn-primary"
+						action="#{loginBean.authenticate}"/>
+				</p:panel>
+			</h:form>
+
+		</div>
+		<!-- /container -->
+
+
+		<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+		<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
+
+
+	</body>
+</html>

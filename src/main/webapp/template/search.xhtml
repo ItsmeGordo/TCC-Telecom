@@ -1,0 +1,57 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions">
+<h:body>
+
+	<ui:composition template="template.xhtml">
+		<ui:define name="body">
+			<div class="row pt-20">
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+					<h:form id="search_form" prependId="false">
+						<h:panelGroup id="searchFilterPanel" layout="block"
+							styleClass="row pl-20 pr-20" rendered="#{searchEnable}">
+							<p:defaultCommand target="searchButton" />
+							<div
+								class="col-lg-12 col-md-12 col-sm-12 col-xs-12 search-form ptb20">
+								<button type="button" class="close"
+									onclick="showHideSearchFilter('filterToggleButton')">
+									<i class="icon-remove" />
+								</button>
+								<ui:insert name="search" />
+								<div class="form-actions" >
+									<h:commandButton id="searchButton" process="search_form"
+										update="#{searchTable}" name="searchButton"
+										action="#{actionBean.preSearch(true)}"
+										value="Buscar" styleClass="btn btn-primary btn-sm"/>
+									<f:verbatim>&#160;&#160;</f:verbatim>
+									<h:commandButton id="cancelButton" value="Limpar"
+										styleClass="btn" action="#{actionBean.clearFields()}"
+										process="search_form" update="#{searchTable} search_form"/>
+								</div>
+							</div>
+						</h:panelGroup>
+						<div class="row">
+							<div class="col-md-12 pt-20">
+								<h:panelGroup id="tablePanel">
+									<ui:insert name="report_table" />
+								</h:panelGroup>
+								<ui:insert name="snippets" />
+								<h:panelGroup id="dialogs">
+									<ui:insert name="dialogs" />
+								</h:panelGroup>
+							</div>
+						</div>
+					</h:form>
+				</div>
+			</div>
+
+		</ui:define>
+
+	</ui:composition>
+
+</h:body>
+</html>
